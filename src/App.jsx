@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Timer from './components/Timer'
 
 function App() {
   const [timer, setTimer] = useState({
@@ -48,7 +49,7 @@ function App() {
   return (
     <>
       <h1>Hello, World !</h1>
-      <h2>Test: {Math.floor((timer.time % 360000) / 6000).toString().padStart(2, "0")} : {Math.floor((timer.time % 6000) / 100).toString().padStart(2, "0")}</h2>
+      <Timer time={timer.time}/>
       <button onClick={testStart}>Test</button>
       <button onClick={testAddTime}>Add a minute</button>
     </>
