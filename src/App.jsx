@@ -72,13 +72,14 @@ function App() {
   }
 
   function addTime(target1, target2) {
-    setTimer(prevTimer => {
+    if(timer[target1] < 360000) {
+      setTimer(prevTimer => {
       return {
         ...prevTimer,
         [target1]: prevTimer[target1] + 6000,
         [target2]: prevTimer[target1] + 6000
       }
-    })
+    })}
   }
 
   function removeTime(target1, target2) {
@@ -119,6 +120,8 @@ function App() {
       <Timer 
         time={timer.isItBreak ? timer.breakSeconds : timer.sessionSeconds}
         isItBreak={timer.isItBreak}
+        idOfLabel={'timer-label'}
+        idOfTimeLeft={'time-left'}
       />
       <hr/>
       <button id="start_stop" onClick={startPause}>Start/Pause</button>
