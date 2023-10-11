@@ -4,9 +4,13 @@ import Counter from './components/Counter'
 
 function App() {
   const [timer, setTimer] = useState({
-    time: 6000,
-    workTime: 6000,
-    breakTime: 6000,
+    //Two different "seconds" golder for different timers
+
+    workSeconds: 150000,
+    workTime: 150000,
+    breakSeconds: 30000,
+    breakTime: 30000,
+    isItBreak: false,
     timerActive: false
   })
 
@@ -31,6 +35,17 @@ function App() {
 
   }, [timer])
 
+  function reset() {
+    setTimer({
+      workSeconds: 150000,
+      workTime: 150000,
+      breakSeconds: 30000,
+      breakTime: 30000,
+      isItBreak: false,
+      timerActive: false
+    })
+  }
+
   function startPause() {
     setTimer(prevTimer => {
       return {
@@ -40,21 +55,23 @@ function App() {
     })
   }
 
-  function addTime(target) {
+  function addTime(target1, target2) {
     setTimer(prevTimer => {
       return {
         ...prevTimer,
-        [target]: prevTimer[target] + 6000
+        [target1]: prevTimer[target1] + 6000,
+        [target2]: prevTimer[target1] + 6000
       }
     })
   }
 
-  function removeTime(target) {
-    if(timer[target] > 0) {
+  function removeTime(target1, target2) {
+    if(timer[target1] > 6000) {
       setTimer(prevTimer => {
         return {
           ...prevTimer,
-          [target]: prevTimer[target] - 6000
+          [target1]: prevTimer[target1] - 6000,
+          [target2]: prevTimer[target1] - 6000
         }
       })
     }
@@ -66,19 +83,19 @@ function App() {
       <Counter
         title='Work Time'
         time={timer.workTime}
-        addFunc={() => addTime('workTime')}
-        reduceFunc={() => removeTime('workTime')}
+        addFunc={() => addTime('workTime', 'workSeconds')}
+        reduceFunc={() => removeTime('workTime', 'workSeconds')}
       />
       <Counter
         title='Break Time'
         time={timer.breakTime}
-        addFunc={() => addTime('breakTime')}
-        reduceFunc={() => removeTime('breakTime')}
+        addFunc={() => addTime('breakTime', 'breakSeconds')}
+        reduceFunc={() => removeTime('breakTime', 'breakSeconds')}
       />
-      <Timer time={timer.time}/>
+      <Timer time={timer.workSeconds}/>
       <hr/>
       <button onClick={startPause}>Start/Pause</button>
-      <button>Test Reset</button>
+      <button onClick={reset}>Test Reset</button>
     </>
   )
 }
