@@ -121,8 +121,8 @@ function App() {
         isItBreak={timer.isItBreak}
       />
       <hr/>
-      <button onClick={startPause}>Start/Pause</button>
-      <button onClick={reset}>Reset</button>
+      <button id="start_stop" onClick={startPause}>Start/Pause</button>
+      <button id="reset" onClick={reset}>Reset</button>
     </>
   )
 }
