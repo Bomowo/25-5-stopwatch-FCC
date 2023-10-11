@@ -6,10 +6,10 @@ function App() {
   const [timer, setTimer] = useState({
     //Two different "seconds" golder for different timers
 
-    workSeconds: 150000,
-    workTime: 150000,
-    breakSeconds: 30000,
-    breakTime: 30000,
+    sessionSeconds: 300,
+    sessionTime: 300,
+    breakSeconds: 300,
+    breakTime: 300,
     isItBreak: false,
     timerActive: false
   })
@@ -17,10 +17,10 @@ function App() {
   useEffect(() => {
     let intervalId
 
-    if(timer.timerActive && timer.workSeconds === 0 && !timer.isItBreak) {
+    if(timer.timerActive && timer.sessionSeconds === 0 && !timer.isItBreak) {
       setTimer(prevTimer =>{ return {
         ...prevTimer,
-        workSeconds: prevTimer.workTime,
+        sessionSeconds: prevTimer.sessionTime,
         isItBreak: true
       }})
     }
@@ -36,7 +36,7 @@ function App() {
     if(timer.timerActive && !timer.isItBreak){
         intervalId = setInterval(() => setTimer(prevTimer => {return {
           ...prevTimer,
-          workSeconds: prevTimer.workSeconds - 1
+          sessionSeconds: prevTimer.sessionSeconds - 1
         }}), 10)
     }
 
@@ -53,8 +53,8 @@ function App() {
 
   function reset() {
     setTimer({
-      workSeconds: 150000,
-      workTime: 150000,
+      sessionSeconds: 150000,
+      sessionTime: 150000,
       breakSeconds: 30000,
       breakTime: 30000,
       isItBreak: false,
@@ -95,21 +95,21 @@ function App() {
 
   return (
     <>
-      <h1>Break + Work - Timer</h1>
+      <h1>Break + Session - Timer</h1>
       <Counter
-        title='Work Time'
-        time={timer.workTime}
-        addFunc={() => addTime('workTime', 'workSeconds')}
-        reduceFunc={() => removeTime('workTime', 'workSeconds')}
+        title='Session Length'
+        time={timer.sessionTime}
+        addFunc={() => addTime('sessionTime', 'sessionSeconds')}
+        reduceFunc={() => removeTime('sessionTime', 'sessionSeconds')}
       />
       <Counter
-        title='Break Time'
+        title='Break Length'
         time={timer.breakTime}
         addFunc={() => addTime('breakTime', 'breakSeconds')}
         reduceFunc={() => removeTime('breakTime', 'breakSeconds')}
       />
       <Timer 
-        time={timer.isItBreak ? timer.breakSeconds : timer.workSeconds}
+        time={timer.isItBreak ? timer.breakSeconds : timer.sessionSeconds}
         isItBreak={timer.isItBreak}
       />
       <hr/>
