@@ -1,10 +1,10 @@
-export default function Counter ({time, title, addFunc, reduceFunc, id}) {
+export default function Counter ({time, title, addFunc, reduceFunc, idOfElement, idOfIncrement, idOfDecrement}) {
     return (
-        <div className="counter" id={id}>
+        <div className="counter" id={idOfElement}>
             <h2>{title}</h2>
-            <button onClick={addFunc}>+</button>
+            <button onClick={addFunc} id={idOfIncrement}>+</button>
             <p>{Math.floor(time/6000)}</p>
-            <button onClick={reduceFunc}>-</button>
+            <button onClick={reduceFunc} id={idOfDecrement}>-</button>
         </div>
     )
 }

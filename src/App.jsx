@@ -98,17 +98,21 @@ function App() {
       <h1>Break + Session - Timer</h1>
       <Counter
         title='Session Length'
-        id={'break-label'}
+        idOfElement={'session-label'}
         time={timer.sessionTime}
         addFunc={() => addTime('sessionTime', 'sessionSeconds')}
+        idOfIncrement={'session-increment'}
         reduceFunc={() => removeTime('sessionTime', 'sessionSeconds')}
+        idOfDecrement={'session-decrement'}
       />
       <Counter
         title='Break Length'
-        id={'session-label'}
+        idOfElement={'break-label'}
         time={timer.breakTime}
         addFunc={() => addTime('breakTime', 'breakSeconds')}
+        idOfIncrement={'break-increment'}
         reduceFunc={() => removeTime('breakTime', 'breakSeconds')}
+        idOfDecrement={'break-decrement'}
       />
       <Timer 
         time={timer.isItBreak ? timer.breakSeconds : timer.sessionSeconds}
