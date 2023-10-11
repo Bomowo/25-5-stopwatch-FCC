@@ -100,6 +100,7 @@ function App() {
         title='Session Length'
         idOfElement={'session-label'}
         time={timer.sessionTime}
+        idOfLength={'session-length'}
         addFunc={() => addTime('sessionTime', 'sessionSeconds')}
         idOfIncrement={'session-increment'}
         reduceFunc={() => removeTime('sessionTime', 'sessionSeconds')}
@@ -109,6 +110,7 @@ function App() {
         title='Break Length'
         idOfElement={'break-label'}
         time={timer.breakTime}
+        idOfLength={'break-length'}
         addFunc={() => addTime('breakTime', 'breakSeconds')}
         idOfIncrement={'break-increment'}
         reduceFunc={() => removeTime('breakTime', 'breakSeconds')}
