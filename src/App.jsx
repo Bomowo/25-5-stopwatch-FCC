@@ -98,12 +98,14 @@ function App() {
       <h1>Break + Session - Timer</h1>
       <Counter
         title='Session Length'
+        id={'break-label'}
         time={timer.sessionTime}
         addFunc={() => addTime('sessionTime', 'sessionSeconds')}
         reduceFunc={() => removeTime('sessionTime', 'sessionSeconds')}
       />
       <Counter
         title='Break Length'
+        id={'session-label'}
         time={timer.breakTime}
         addFunc={() => addTime('breakTime', 'breakSeconds')}
         reduceFunc={() => removeTime('breakTime', 'breakSeconds')}
