@@ -17,19 +17,35 @@ function App() {
   useEffect(() => {
     let intervalId
 
-    if(timer.timerActive && timer.time === 0) {
-      setTimer({
-        time: 0,
-        timerActive: false
-      })
+    if(timer.timerActive && timer.workSeconds === 0 && !timer.isItBreak) {
+      setTimer(prevTimer =>{ return {
+        ...prevTimer,
+        workSeconds: prevTimer.workTime,
+        isItBreak: true
+      }})
     }
 
-    if(timer.timerActive){
+    if(timer.timerActive && timer.breakSeconds === 0 && timer.isItBreak) {
+      setTimer(prevTimer =>{ return {
+        ...prevTimer,
+        breakSeconds: prevTimer.breakTime,
+        isItBreak: false
+      }})
+    }
+
+    if(timer.timerActive && !timer.isItBreak){
         intervalId = setInterval(() => setTimer(prevTimer => {return {
           ...prevTimer,
-          time: prevTimer.time - 1
+          workSeconds: prevTimer.workSeconds - 1
         }}), 10)
     }
+
+    if(timer.timerActive && timer.isItBreak){
+      intervalId = setInterval(() => setTimer(prevTimer => {return {
+        ...prevTimer,
+        breakSeconds: prevTimer.breakSeconds - 1
+      }}), 10)
+  }
 
     return () => clearInterval(intervalId)
 
@@ -92,10 +108,13 @@ function App() {
         addFunc={() => addTime('breakTime', 'breakSeconds')}
         reduceFunc={() => removeTime('breakTime', 'breakSeconds')}
       />
-      <Timer time={timer.workSeconds}/>
+      <Timer 
+        time={timer.isItBreak ? timer.breakSeconds : timer.workSeconds}
+        isItBreak={timer.isItBreak}
+      />
       <hr/>
       <button onClick={startPause}>Start/Pause</button>
-      <button onClick={reset}>Test Reset</button>
+      <button onClick={reset}>Reset</button>
     </>
   )
 }
