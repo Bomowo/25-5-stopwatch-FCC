@@ -6,10 +6,10 @@ function App() {
   const [timer, setTimer] = useState({
     //Two different "seconds" golder for different timers
 
-    sessionSeconds: 300,
-    sessionTime: 300,
-    breakSeconds: 300,
-    breakTime: 300,
+    sessionSeconds: 150000,
+    sessionTime: 150000,
+    breakSeconds: 30000,
+    breakTime: 30000,
     isItBreak: false,
     timerActive: false
   })
