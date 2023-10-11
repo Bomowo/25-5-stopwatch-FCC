@@ -6,3 +6,6 @@ body {
   align-items: center;
   height: 100vh;
 }
+.counter {
+  display: flex;
+}
