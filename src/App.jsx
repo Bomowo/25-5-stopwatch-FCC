@@ -4,7 +4,7 @@ import Counter from './components/Counter'
 
 function App() {
   const [timer, setTimer] = useState({
-    time: 0,
+    time: 6000,
     workTime: 6000,
     breakTime: 6000,
     timerActive: false
@@ -31,51 +31,53 @@ function App() {
 
   }, [timer])
 
-  function testStart() {
+  function startPause() {
     setTimer(prevTimer => {
       return {
         ...prevTimer,
-        timerActive: true
+        timerActive: !prevTimer.timerActive
       }
     })
   }
 
-  function testAddTime() {
+  function addTime(target) {
     setTimer(prevTimer => {
       return {
         ...prevTimer,
-        time: prevTimer.time + 6000
+        [target]: prevTimer[target] + 6000
       }
     })
   }
 
-  function testRemoveTime() {
-    setTimer(prevTimer => {
-      return {
-        ...prevTimer,
-        time: prevTimer.time - 6000
-      }
-    })
+  function removeTime(target) {
+    if(timer[target] > 0) {
+      setTimer(prevTimer => {
+        return {
+          ...prevTimer,
+          [target]: prevTimer[target] - 6000
+        }
+      })
+    }
   }
 
   return (
     <>
       <h1>Break + Work - Timer</h1>
-      <Timer time={timer.time}/>
       <Counter
         title='Work Time'
         time={timer.workTime}
-        addFunc={testAddTime}
-        reduceFunc={testRemoveTime}
+        addFunc={() => addTime('workTime')}
+        reduceFunc={() => removeTime('workTime')}
       />
       <Counter
         title='Break Time'
         time={timer.breakTime}
-        addFunc={testAddTime}
-        reduceFunc={testRemoveTime}
+        addFunc={() => addTime('breakTime')}
+        reduceFunc={() => removeTime('breakTime')}
       />
+      <Timer time={timer.time}/>
       <hr/>
-      <button onClick={testStart}>Test</button>
+      <button onClick={startPause}>Start/Pause</button>
       <button>Test Reset</button>
     </>
   )
