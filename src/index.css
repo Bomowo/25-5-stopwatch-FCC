@@ -5,7 +5,43 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #222E50;
+  color: #E9D985;
+  text-align: center;
+  font-family: 'Gabarito', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
 }
 .counter {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+.counter-title{
+  grid-column: 1/4;
+}
+.counter-plus {
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.counter-minus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.counter-number {
+  font-size: 1.5rem;
+}
+button {
+  background-color: #007991;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border: none;
+  margin: 10px;
+  color: #E9D985;
+  font-size: 1.5rem;
 }

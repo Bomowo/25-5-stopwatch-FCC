@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import Timer from './components/Timer'
 import Counter from './components/Counter'
+import {FaArrowsRotate} from 'react-icons/fa6'
+import {PiPlayPauseFill} from 'react-icons/pi'
 
 function App() {
   const [timer, setTimer] = useState({
@@ -123,9 +125,8 @@ function App() {
         idOfLabel={'timer-label'}
         idOfTimeLeft={'time-left'}
       />
-      <hr/>
-      <button id="start_stop" onClick={startPause}>Start/Pause</button>
-      <button id="reset" onClick={reset}>Reset</button>
+      <button id="start_stop" onClick={startPause}><PiPlayPauseFill/></button>
+      <button id="reset" onClick={reset}><FaArrowsRotate/></button>
     </>
   )
 }
